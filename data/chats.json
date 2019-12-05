@@ -1,0 +1,16 @@
+{
+  "chats": [
+    {
+      "title": "Chat 1",
+      "status": "active"
+    },
+    {
+      "name": "Chat 2",
+      "status": "active"
+    },
+    {
+      "name": "Chat 3",
+      "status": "active"
+    }
+  ]
+}

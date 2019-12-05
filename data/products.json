@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "name": "Product 1",
+      "color": "green"
+    },
+    {
+      "name": "Product 2",
+      "color": "orange"
+    },
+    {
+      "name": "Product 3",
+      "color": "yellow"
+    }
+  ]
+}
