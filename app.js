@@ -13,16 +13,6 @@ app.get('/', (req, res) => {
   res.status(200).send('Server is up and running!');
 })
 
-app.get('/products', (req, res) => {
-  console.log(req.query)
-  res.status(200).json(
-    {
-      "name": "Product 1",
-      "color": "green"
-    }
-  );
-})
-
 app.listen(port, () => {
   console.log('App is running');
 })

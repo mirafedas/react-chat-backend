@@ -1,39 +1,23 @@
-const fs = require('fs');
 const Chat = require('../models/chatModel');
 
-exports.checkID = (req, res, next, val) => {
-  console.log(`Chat id is: ${val}`);
+exports.getAllChats = async (req, res) => {
+  try {
+    const chats = await Chat.find();
+    console.log(chats)
 
-  if (req.params.id * 1 > chats.length) {
-    return res.status(404).json({
+    res.status(200).json({
+      status: 'success',
+      results: chats.length,
+      data: {
+        chats
+      }
+    });
+  } catch(err) {
+    res.status(404).json({
       status: 'fail',
-      message: 'Invalid ID'
+      message: err
     });
   }
-  next();
-};
-
-exports.checkBody = (req, res, next) => {
-  if (!req.body.title) {
-    return res.status(400).json({
-      status: 'fail',
-      message: 'Missing title'
-    });
-  }
-  next();
-};
-
-exports.getAllChats = (req, res) => {
-  console.log(req.requestTime);
-
-  res.status(200).json({
-    status: 'success',
-    requestedAt: req.requestTime,
-    results: chats.length,
-    data: {
-      chats
-    }
-  });
 };
 
 exports.getChat = (req, res) => {
@@ -50,26 +34,22 @@ exports.getChat = (req, res) => {
   });
 };
 
-exports.createChat = (req, res) => {
-  // console.log(req.body);
+exports.createChat = async (req, res) => {
+  try {
+    const newChat = await Chat.create(req.body);
 
-  const newId = products[chats.length - 1].id + 1;
-  const newChat = Object.assign({ id: newId }, req.body);
-
-  chats.push(newChat);
-
-  fs.writeFile(
-    `${__dirname}/data/chats.json`,
-    JSON.stringify(chats),
-    err => {
-      res.status(201).json({
-        status: 'success',
-        data: {
-          chat: newChat
-        }
-      });
-    }
-  );
+    res.status(201).json({
+      status: 'success',
+      data: {
+        chat: newChat
+      }
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'failed',
+      message: err
+    });
+  }
 };
 
 exports.updateChat = (req, res) => {
