@@ -3,7 +3,7 @@ const Chat = require('../models/chatModel');
 exports.getAllChats = async (req, res) => {
   try {
     const chats = await Chat.find();
-    console.log(chats)
+    // console.log(chats)
 
     res.status(200).json({
       status: 'success',
